@@ -1020,7 +1020,7 @@ class Pin():
 			events=po.poll()
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
-				po.unregister
+				po.unregister(fd)
 				callback()
 				po.register(fd,select.EPOLLET)
 				counter=0
@@ -1134,7 +1134,7 @@ class Daisy5():
 			events=po.poll()
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
-				po.unregister
+				po.unregister(fd)
 				callback()
 				po.register(fd,select.EPOLLET)
 				counter=0
@@ -1822,7 +1822,7 @@ class Daisy8():
 			events=po.poll()
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
-				po.unregister
+				po.unregister(fd)
 				callback()
 				po.register(fd,select.EPOLLET)
 				counter=0
@@ -2165,7 +2165,7 @@ class Daisy18():
 			events=po.poll()
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
-				po.unregister
+				po.unregister(fd)
 				callback()
 				po.register(fd,select.EPOLLET)
 				counter=0
