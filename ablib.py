@@ -1018,11 +1018,13 @@ class Pin():
 		po.register(fd,select.EPOLLET)
 		while True:
 			events = po.poll()
+			po.unregister(fd)
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
 				callback()
 			counter=counter+1
 			timestampprec=timestamp
+			po.register(fd,select.EPOLLET)
 
 	def set_edge(self,value,callback,debouncingtime=0):
 		if self.fd!=None:
@@ -1128,9 +1130,11 @@ class Daisy5():
 		po.register(fd,select.EPOLLET)
 		while True:
 			events = po.poll()
+			po.unregister(fd)
 			if counter>0:	
 				callback()
 			counter=counter+1
+			po.register(fd,select.EPOLLET)
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
@@ -1810,9 +1814,11 @@ class Daisy8():
 		po.register(fd,select.EPOLLET)
 		while True:
 			events = po.poll()
+			po.unregister(fd)
 			if counter>0:	
 				callback()
 			counter=counter+1
+			po.register(fd,select.EPOLLET)
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
@@ -2147,9 +2153,11 @@ class Daisy18():
 		po.register(fd,select.EPOLLET)
 		while True:
 			events = po.poll()
+			po.unregister(fd)
 			if counter>0:	
 				callback()
 			counter=counter+1
+			po.register(fd,select.EPOLLET)
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
