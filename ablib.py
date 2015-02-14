@@ -1017,14 +1017,16 @@ class Pin():
 		po = select.epoll()
 		po.register(fd,select.EPOLLET)
 		while True:
-			events = po.poll()
-			po.unregister(fd)
+			events=po.poll()
 			timestamp=time.time()
 			if (timestamp-timestampprec>debouncingtime) and counter>0:
+				po.unregister
 				callback()
-			counter=counter+1
+				po.register(fd,select.EPOLLET)
+				counter=0
+			else:
+				counter=counter+1
 			timestampprec=timestamp
-			po.register(fd,select.EPOLLET)
 
 	def set_edge(self,value,callback,debouncingtime=0):
 		if self.fd!=None:
@@ -1129,12 +1131,16 @@ class Daisy5():
 		po = select.epoll()
 		po.register(fd,select.EPOLLET)
 		while True:
-			events = po.poll()
-			po.unregister(fd)
-			if counter>0:	
+			events=po.poll()
+			timestamp=time.time()
+			if (timestamp-timestampprec>debouncingtime) and counter>0:
+				po.unregister
 				callback()
-			counter=counter+1
-			po.register(fd,select.EPOLLET)
+				po.register(fd,select.EPOLLET)
+				counter=0
+			else:
+				counter=counter+1
+			timestampprec=timestamp
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
@@ -1813,12 +1819,16 @@ class Daisy8():
 		po = select.epoll()
 		po.register(fd,select.EPOLLET)
 		while True:
-			events = po.poll()
-			po.unregister(fd)
-			if counter>0:	
+			events=po.poll()
+			timestamp=time.time()
+			if (timestamp-timestampprec>debouncingtime) and counter>0:
+				po.unregister
 				callback()
-			counter=counter+1
-			po.register(fd,select.EPOLLET)
+				po.register(fd,select.EPOLLET)
+				counter=0
+			else:
+				counter=counter+1
+			timestampprec=timestamp
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
@@ -2152,12 +2162,16 @@ class Daisy18():
 		po = select.epoll()
 		po.register(fd,select.EPOLLET)
 		while True:
-			events = po.poll()
-			po.unregister(fd)
-			if counter>0:	
+			events=po.poll()
+			timestamp=time.time()
+			if (timestamp-timestampprec>debouncingtime) and counter>0:
+				po.unregister
 				callback()
-			counter=counter+1
-			po.register(fd,select.EPOLLET)
+				po.register(fd,select.EPOLLET)
+				counter=0
+			else:
+				counter=counter+1
+			timestampprec=timestamp
 
 	def set_edge(self,value,callback):
 		if self.fd!=None:
